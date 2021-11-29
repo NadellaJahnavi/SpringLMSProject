@@ -46,8 +46,8 @@ public class UserAddressServiceImpl implements UserAddressService {
 
 	@Override
 	public List<UserAddress> viewUserAddressList() {
-		List<UserAddress> L2 = useraddressrepo.findAll();
-		return L2;
+		List<UserAddress> l2 = useraddressrepo.findAll();
+		return l2;
 	}
 
 	@Override

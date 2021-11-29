@@ -1,6 +1,7 @@
 package com.entities;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -8,12 +9,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="booksreturned")
@@ -27,18 +31,18 @@ public class BooksReturned {
 	private Date returnedDate;
 	
 	@NotNull	
-	private int delayed_Days;
+	private int delayedDays;
 	
 	@NotNull
 	private double penalty;
 	
 	@Pattern(regexp = "^[A-Za-z ]{1,20}$", message = "Status must only be alphabets and whitespaces from 1 to 20 characters")
-	private String penalty_Status;
+	private String penaltyStatus;
 
-	@ManyToOne(cascade=CascadeType.MERGE) 
+	@ManyToOne(cascade=CascadeType.ALL) 
 	private Books books;
 
-	@OneToOne(cascade=CascadeType.MERGE) 
+	@OneToOne(cascade=CascadeType.ALL) 
 	private Users users;
 		  
 	public int getId() 
@@ -59,15 +63,12 @@ public class BooksReturned {
 		this.returnedDate = returnedDate;
 	}
 	
-	public int getDelayed_Days() 
-	{
-		return delayed_Days;
+	public int getDelayedDays() {
+		return delayedDays;
 	}
-	public void setDelayed_Days(int delayed_Days)
-	{
-		this.delayed_Days = delayed_Days;
+	public void setDelayedDays(int delayedDays) {
+		this.delayedDays = delayedDays;
 	}
-	
 	public double getPenalty()
 	{
 		return penalty;
@@ -76,23 +77,19 @@ public class BooksReturned {
 	{
 		this.penalty = penalty;
 	}
-	public String getPenalty_Status() {
-		return penalty_Status;
+	public String getPenaltyStatus() {
+		return penaltyStatus;
 	}
-	public void setPenalty_Status(String penalty_Status) 
-	{
-		this.penalty_Status = penalty_Status;
+	public void setPenaltyStatus(String penaltyStatus) {
+		this.penaltyStatus = penaltyStatus;
 	}
 	
-	public Books getBooks()
-	{
+	public Books getBooks() {
 		return books;
 	}
-	public void setBooks(Books books) 
-	{
+	public void setBooks(Books books) {
 		this.books = books;
 	}
-	
 	public Users getUsers() 
 	{
 		return users;
@@ -101,4 +98,11 @@ public class BooksReturned {
 	{
 		this.users = users;
 	}
+	@Override
+	public String toString() {
+		return "BooksReturned [id=" + id + ", returnedDate=" + returnedDate + ", delayedDays=" + delayedDays
+				+ ", penalty=" + penalty + ", penaltyStatus=" + penaltyStatus + ", books=" + books + ", users=" + users
+				+ "]";
+	}
+	
 }

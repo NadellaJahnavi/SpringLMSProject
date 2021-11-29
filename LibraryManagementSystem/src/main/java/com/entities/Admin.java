@@ -2,13 +2,11 @@ package com.entities;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
@@ -27,18 +25,6 @@ public class Admin {
 	
 	@Column(name = "adminName", length = 40, nullable = false)
 	private String adminName;
-	
-	@OneToMany(mappedBy="admin")	  
-	private List<Books> books;
-	  
-	@OneToMany(mappedBy="admin")
-	private List<BooksOrder> booksorder;
-	  
-	@OneToMany(mappedBy="admin")
-	private List<DamagedBooks> damagedbooks;
-	  
-	@OneToMany//(cascade=CascadeType.ALL)
-	private List<Users> users;
 		
 	public int getAdminId() 
 	{

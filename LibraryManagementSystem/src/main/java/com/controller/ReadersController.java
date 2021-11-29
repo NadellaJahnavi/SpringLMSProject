@@ -2,9 +2,11 @@ package com.controller;
 
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.Service.ReadersService;
 import com.advices.ReaderNotFoundException;
 import com.entities.Readers;
+@CrossOrigin
 @RestController
 @RequestMapping("/lms")
 public class ReadersController {
@@ -33,11 +36,11 @@ public class ReadersController {
 	   return re;
 	}
 	
-	@DeleteMapping("/deleteReader")
-	public ResponseEntity<Readers> deleteReader(@RequestBody int id)
+	@DeleteMapping("/deleteReader/{id}")
+	public ResponseEntity<String> deleteReader(@PathVariable  int id) throws Throwable
 	{
-		String r1= readerserv.deleteReader(id);
-		ResponseEntity re = new ResponseEntity<String>("deleted",HttpStatus.OK);
+		readerserv.deleteReader(id);
+		ResponseEntity<String> re = new ResponseEntity<String>("deleted",HttpStatus.OK);
 		return re;
 	}
 	
@@ -50,9 +53,9 @@ public class ReadersController {
 	}
 	
 	@PatchMapping(path = "/login")
-	public String loginValidate(@RequestParam String Id, String password) throws ReaderNotFoundException
+	public String loginvalidate(@RequestParam String id, String password) throws ReaderNotFoundException
 	{	
-		readerserv.loginValidate(Id, password);
+		readerserv.loginvalidate(id, password);
 		return "Login Successful!!!";
 	}
 	
@@ -64,7 +67,7 @@ public class ReadersController {
 		return re;
 	}
 	
-	@GetMapping("/viewreaderid/{id}")
+	@GetMapping("/viewreaderbyid/{id}")
 	public ResponseEntity<Readers> viewReaderById(@PathVariable int id)
 	{
 		

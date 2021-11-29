@@ -45,17 +45,13 @@ public class GlobalExceptionHandler {
 	  ErrorDetails errorDetails = new ErrorDetails(LocalDateTime.now(),ex.getMessage(), request.getDescription(false)); 
 	  return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND); 
 	  }
-	  
-	
-	  
+	 
 	  @ExceptionHandler(ReaderNotFoundException.class) 
 	  public ResponseEntity<?>handlereadernotfoundexception(ReaderNotFoundException ex, WebRequest request)
 	  {
 		  ErrorDetails errorDetails = new ErrorDetails(LocalDateTime.now(),ex.getMessage(), request.getDescription(false));
 		  return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
 	  }
-	  
-	
 	  
 	  @ExceptionHandler(UserNotFoundException.class) 
 	  public ResponseEntity<?> handleusernotfoundexception(UserNotFoundException ex, WebRequest request)
@@ -64,6 +60,33 @@ public class GlobalExceptionHandler {
 	  return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND); 
 	  }
 	  
+	  @ExceptionHandler(PublisherNotFoundException.class) 
+	  public ResponseEntity<?> handlepublishernotfoundexception(PublisherNotFoundException ex, WebRequest request)
+	  {
+	  ErrorDetails errorDetails = new ErrorDetails(LocalDateTime.now(), ex.getMessage(), request.getDescription(false)); 
+	  return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND); 
+	  }
+	  
+	  @ExceptionHandler(InvalidCredentialsException.class) 
+	  public ResponseEntity<?> handleinvalidcredentialsexception(InvalidCredentialsException ex, WebRequest request)
+	  {
+	  ErrorDetails errorDetails = new ErrorDetails(LocalDateTime.now(), ex.getMessage(), request.getDescription(false)); 
+	  return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND); 
+	  }
+	  
+	  @ExceptionHandler(UserFoundException.class) 
+	  public ResponseEntity<?> handleuserfoundexception(UserFoundException ex, WebRequest request)
+	  {
+	  ErrorDetails errorDetails = new ErrorDetails(LocalDateTime.now(), ex.getMessage(), request.getDescription(false)); 
+	  return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND); 
+	  }
+	  
+	  @ExceptionHandler(Exception.class)
+		public ResponseEntity<?> globalExceptionHandler(Exception ex, WebRequest request)
+		{
+			ErrorDetails errordetails=new ErrorDetails(LocalDateTime.now(),ex.getMessage(),request.getDescription(false));
+			return new ResponseEntity<>(errordetails,HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	
 	 
 }

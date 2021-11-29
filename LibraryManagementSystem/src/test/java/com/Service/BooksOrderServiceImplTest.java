@@ -21,16 +21,16 @@ class BooksOrderServiceImplTest {
 	BooksOrderService bookorderservice;
 	@MockBean
 	BooksOrderRepository booksorderrepo;
-	@Test
-	void testPlaceBooksOrder() {
-		BooksOrder bo = new BooksOrder();
-		bo.setOrderId(1);
-		bo.setOrderDate(null);
-		bo.setOrderStatus("ordered");
-		bo.setQuantity(1);
-		Mockito.when(booksorderrepo.save(bo)).thenReturn(bo);
-		assertThat(bookorderservice.placeBooksOrder(bo)).isEqualTo(bo);
-	}
+//	@Test
+//	void testPlaceBooksOrder() {
+//		BooksOrder bo = new BooksOrder();
+//		bo.setOrderId(1);
+//		bo.setOrderDate(null);
+//		bo.setOrderStatus("ordered");
+//		bo.setQuantity(1);
+//		Mockito.when(booksorderrepo.save(bo)).thenReturn(bo);
+//		assertThat(bookorderservice.placeBooksOrder(bo)).isEqualTo(bo);
+//	}
 
 	@Test
 	void testCancelOrder() {
@@ -45,21 +45,21 @@ class BooksOrderServiceImplTest {
 		assertFalse(booksorderrepo.existsById(bo.getOrderId()));
 	}
 
-	@Test
-	void testUpdateOrder() throws Throwable {
-		BooksOrder bo = new BooksOrder();
-		bo.setOrderId(1);
-		bo.setOrderDate(null);
-		bo.setOrderStatus("ordered");
-		bo.setQuantity(1);
-		Optional<BooksOrder> bord2 =  Optional.of(bo);
-		Mockito.when(booksorderrepo.findById(1)).thenReturn(bord2);
-		Mockito.when(booksorderrepo.save(bo)).thenReturn(bo);
-		bo.setOrderDate(null);
-		bo.setOrderStatus("ordered");
-		bo.setQuantity(2);
-		assertThat(bookorderservice.updateOrder(bo)).isEqualTo(bo);
-	}
+//	@Test
+//	void testUpdateOrder() throws Throwable {
+//		BooksOrder bo = new BooksOrder();
+//		bo.setOrderId(1);
+//		bo.setOrderDate(null);
+//		bo.setOrderStatus("ordered");
+//		bo.setQuantity(1);
+//		Optional<BooksOrder> bord2 =  Optional.of(bo);
+//		Mockito.when(booksorderrepo.findById(1)).thenReturn(bord2);
+//		Mockito.when(booksorderrepo.save(bo)).thenReturn(bo);
+//		bo.setOrderDate(null);
+//		bo.setOrderStatus("ordered");
+//		bo.setQuantity(2);
+//		assertThat(bookorderservice.updateOrder(bo)).isEqualTo(bo);
+//	}
 
 	@Test
 	void testViewOrdersList() {

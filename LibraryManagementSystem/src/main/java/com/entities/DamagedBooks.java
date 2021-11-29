@@ -28,10 +28,7 @@ public class DamagedBooks {
 	
 	@OneToOne(cascade=CascadeType.MERGE)   
 	private Books books;
-			  
-	@ManyToOne(cascade=CascadeType.MERGE)
-	private Admin admin;
-	 
+			   
 	public Books getBooks()
 	{
 		return books;
@@ -67,15 +64,5 @@ public class DamagedBooks {
 	{
 		this.description = description;
 	}
-	
-	public Admin getAdmin() 
-	{ 
-		  return admin; 
-	} 
-	public void setAdmin(Admin admin)
-	{
-	   this.admin = admin;
-	}
-	 
 
 }

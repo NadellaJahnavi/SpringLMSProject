@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -25,10 +26,6 @@ public class Users {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int userid;
 	 
-	@Column(name = "password",unique=true, nullable = false)
-	@Pattern(regexp = "^[a-zA-Z0-9.-_]{1,20}$", message = "Password must contain alphabets and  may contain (./-/_)  and length from 1 to 20 characters")	
-	private String password;
-	
 	@Column(name = "firstname",unique=true, nullable = false)
 	@Pattern(regexp = "^[a-zA-Z0-9.-_]{1,20}$", message = "Name must contain alphabets and  may contain (./-/_)  and length from 1 to 20 characters")	
 	private String firstName;
@@ -42,28 +39,13 @@ public class Users {
 	@Size(max = 10, message = "Contact number must be 10 numbers")
 	private String mobileno;
 	
-	@Column(name = "email", unique = true, nullable = false, length = 25)
-	@Pattern(regexp = "^[a-z0-9+_.-]+@[a-z0-9.-]+$")
-	@Size(max = 25, message = "Email should have be valid")
-	private String email;
-	
 	@NotNull
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date date_of_birth;
+	private Date dateofbirth;
 	
-	@NotNull
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date subscription_date;
-	
-	@NotNull
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date sub_expire_date;
-	
-	@NotNull
-	private String subscription_status;
-	
-	@ManyToOne
-	private Admin admin;
+	@OneToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="login")
+	private Login login;
 	
 	public int getUserid()
 	{
@@ -72,15 +54,6 @@ public class Users {
 	public void setUserid(int userid) 
 	{
 		this.userid = userid;
-	}
-	
-	public String getPassword()
-	{
-		return password;
-	}
-	public void setPassword(String password)
-	{
-		this.password = password;
 	}
 	
 	public String getFirstName() 
@@ -109,59 +82,19 @@ public class Users {
 	{
 		this.mobileno = mobileno;
 	}
-	
-	public String getEmail()
-	{
-		return email;
+
+	public Date getDateofbirth() {
+		return dateofbirth;
 	}
-	public void setEmail(String email) 
-	{
-		this.email = email;
+	public void setDateofbirth(Date dateofbirth) {
+		this.dateofbirth = dateofbirth;
 	}
 	
-	public Date getDate_of_birth()
-	{
-		return date_of_birth;
+	public Login getLogin() {
+		return login;
 	}
-	public void setDate_of_birth(Date date_of_birth)
-	{
-		this.date_of_birth = date_of_birth;
+	public void setLogin(Login login) {
+		this.login = login;
 	}
-	
-	public Date getSubscription_date()
-	{
-		return subscription_date;
-	}
-	public void setSubscription_date(Date subscription_date) 
-	{
-		this.subscription_date = subscription_date;
-	}
-	
-	public Date getSub_expire_date() 
-	{
-		return sub_expire_date;
-	}
-	public void setSub_expire_date(Date sub_expire_date)
-	{
-		this.sub_expire_date = sub_expire_date;
-	}
-	
-	public String getSubscription_status()
-	{
-		return subscription_status;
-	}
-	public void setSubscription_status(String subscription_status)
-	{
-		this.subscription_status = subscription_status;
-	}
-	
-	public Admin getAdmin() 
-	{
-		return admin;
-	}
-	public void setAdmin(Admin admin)
-	{
-		this.admin = admin;
-	}
- 
+
 }

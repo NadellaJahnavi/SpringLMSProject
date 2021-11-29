@@ -2,13 +2,13 @@ package com.Service;
 
 import java.util.List;
 
+import com.dto.BooksorderDto;
 import com.entities.BooksOrder;
 
 public interface BooksOrderService {
-	public BooksOrder placeBooksOrder(BooksOrder orderdetails);
-	public String cancelOrder(BooksOrder orderId);
-	public BooksOrder updateOrder(BooksOrder order) throws Throwable;
+	public BooksOrder placeBooksOrder(BooksorderDto orderdetails);
+	public String cancelOrder(int orderId) throws Throwable;
+	public BooksOrder updateOrder(BooksorderDto order) throws Throwable;
 	public List<BooksOrder> viewOrdersList();
-	public BooksOrder viewOrderById(int orderId) throws Throwable;
-
+	public BooksorderDto viewOrderById(int orderId) throws Throwable;
 }

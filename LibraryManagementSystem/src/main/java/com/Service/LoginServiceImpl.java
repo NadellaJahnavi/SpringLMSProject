@@ -1,62 +1,63 @@
 package com.Service;
 
-import java.util.List;
-import java.util.function.Supplier;
+import java.util.Optional;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.advices.IDNotFoundException;
+import com.advices.InvalidCredentialsException;
+import com.dto.LoginDto;
 import com.entities.Login;
 import com.repository.LoginRepository;
-import com.repository.UsersRepository;
+
 @Service
-public class LoginServiceImpl implements LoginService{
+public class LoginServiceImpl implements LoginService {
 	@Autowired
-	LoginRepository loginrepo;
-	//@Autowired
-	//UsersRepository usersrepo;
-	
+	LoginRepository loginRepo;
+
+	private static Logger logger = LogManager.getLogger();
+
 	@Override
-	public Login addLoginDetails(Login login) {
-		return loginrepo.save(login);
+	public LoginDto login(Login login) throws InvalidCredentialsException {
+		Optional<Login> opt = loginRepo.findByEmail(login.getEmail());
+		if (!opt.isPresent()) {
+			throw new InvalidCredentialsException("Invalid Credentials");
+		}
+		Login dbLogin = opt.get();
+		if (login.getEmail().equalsIgnoreCase(dbLogin.getEmail())
+				&& login.getPassword().equalsIgnoreCase(dbLogin.getPassword())
+				&& login.getRole().equalsIgnoreCase(dbLogin.getRole())) {
+			// set isLoggedIn flag to true
+			dbLogin.setLoggedIn(true);
+
+//			// update isLoggedIn flag to true 
+			loginRepo.save(dbLogin);
+			LoginDto dto = new LoginDto();
+			dto.setEmail(login.getEmail());
+			dto.setRole(login.getRole());
+			dto.setLoggedIn(true);
+
+			return dto;
+		} else {
+			throw new InvalidCredentialsException("Invalid credentials");
+		}
 	}
 
 	@Override
-	public Login updateLoginDetails(Login login) throws Throwable {
-		int loginid=login.getLoginId();
-		Supplier s1=()->new IDNotFoundException("userId doesnot exist in the database");
-		Login L=loginrepo.findById(loginid).orElseThrow(s1);
-		L.setLoginId(L.getLoginId());
-		//L.setUserName(L.getUserName());
-		L.setPassword(L.getPassword());
-		loginrepo.save(login);
-		return login;
-	}
-
-	@Override
-	public String deleteLoginDetails(Login login) {
-		loginrepo.delete(login);
-		return "deleted";
-	}
-
-	@Override
-	public List<Login> viewloginList() {
-		List<Login> LC=loginrepo.findAll();
-		return LC;
-	}
-
-	@Override
-	public Login viewusersbyid(int loginid) throws Throwable {
-		Supplier s1=()->new IDNotFoundException("userId doesnot exist in the database");
-		Login Lm= loginrepo.findById(loginid).orElseThrow(s1);
-		return Lm;
-	}
-
-	@Override
-	public Login getuserByName(String userName) {
-		Login UN=loginrepo.findByUserName(userName);
-		return UN;
+	public LoginDto logout(String email) throws InvalidCredentialsException {
+		logger.info(email);
+		Optional<Login> opt = loginRepo.findByEmail(email);
+		if (!opt.isPresent()) {
+			throw new InvalidCredentialsException("Invalid Credentials");
+		}
+		Login login = opt.get();
+		logger.info(login.getEmail());
+		login.setLoggedIn(false);
+		loginRepo.save(login);
+		LoginDto loginDto = new LoginDto();
+		loginDto.setLoggedIn(false);
+		return loginDto;
 	}
 
 }

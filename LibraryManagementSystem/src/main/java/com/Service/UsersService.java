@@ -2,16 +2,14 @@ package com.Service;
 
 import java.util.List;
 
+import com.dto.UsersDto;
 import com.entities.Users;
 
 public interface UsersService {
-	public Users registerUserDetails(Users user);
-	public Users loginValidate(Users user) throws Throwable;
-	//public Users cancelSubscription(Users user);
-	//public int payThePenalty(int userid, double amount);
+	public Users registerUserDetails(UsersDto user) throws Throwable;
+	public Users updateUserDetails(UsersDto user) throws Throwable;
 	public List<Users> viewAllUsers();
-	public Users updateUserDetails(Users user);
-	public Users deleteUserDetails(Users user);
-    public Users getEmail(String email);
+	public Users viewUserById(int userid)throws Throwable;
+	public boolean deleteUserDetails(int userid) throws Throwable;
 	public Users getMobileno(String mobileno);
 }

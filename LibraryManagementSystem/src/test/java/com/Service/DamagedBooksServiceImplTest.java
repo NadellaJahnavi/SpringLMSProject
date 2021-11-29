@@ -1,7 +1,6 @@
 package com.Service;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,27 +20,27 @@ class DamagedBooksServiceImplTest {
 	DamagedBooksService damagedbookservice;
 	@MockBean
 	DamagedBooksRepository damagedbooksrepo;
-	@Test
-	void testAddDamagedBooks() {
-		DamagedBooks db = new DamagedBooks();
-		db.setId(1);
-		db.setDescription("missingpages");
-		db.setQuantity(1);
-		Mockito.when(damagedbooksrepo.save(db)).thenReturn(db);
-		assertThat(damagedbookservice.addDamagedBooks(db)).isEqualTo(db);
-	}
+//	@Test
+//	void testAddDamagedBooks() {
+//		DamagedBooks db = new DamagedBooks();
+//		db.setId(1);
+//		db.setDescription("missingpages");
+//		db.setQuantity(1);
+//		Mockito.when(damagedbooksrepo.save(db)).thenReturn(db);
+//		assertThat(damagedbookservice.addDamagedBooks(db)).isEqualTo(db);
+//	}
 
-	@Test
-	void testUpdateDamagedBookDetails() throws Throwable {
-		DamagedBooks db = new DamagedBooks();
-		db.setId(1);
-		db.setDescription("missingpages");
-		db.setQuantity(1);
-		Optional<DamagedBooks> c2 =  Optional.of(db);
-		Mockito.when(damagedbooksrepo.findById(1)).thenReturn(c2);
-		Mockito.when(damagedbooksrepo.save(db)).thenReturn(db);
-		assertThat(damagedbookservice.updateDamagedBookDetails(db)).isEqualTo(db);
-	}
+//	@Test
+//	void testUpdateDamagedBookDetails() throws Throwable {
+//		DamagedBooks db = new DamagedBooks();
+//		db.setId(1);
+//		db.setDescription("missingpages");
+//		db.setQuantity(1);
+//		Optional<DamagedBooks> c2 =  Optional.of(db);
+//		Mockito.when(damagedbooksrepo.findById(1)).thenReturn(c2);
+//		Mockito.when(damagedbooksrepo.save(db)).thenReturn(db);
+//		assertThat(damagedbookservice.updateDamagedBookDetails(db)).isEqualTo(db);
+//	}
 
 	@Test
 	void testViewDamagedBooksList() {

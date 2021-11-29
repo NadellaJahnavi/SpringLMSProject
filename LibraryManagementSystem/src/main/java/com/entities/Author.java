@@ -3,16 +3,12 @@ package com.entities;
 import java.util.List;
 
 import javax.persistence.CascadeType;
-//import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-//import javax.persistence.ManyToOne;
-//import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -26,11 +22,11 @@ public class Author {
 	private int authorId;
 	
 	@Column(name = "firstname", length = 100, nullable = false,unique = true)
-	@NotNull(message = "Name must contain alphabets and  may contain (./-/_)  and length from 1 to 20 characters")
+	@NotNull(message = "Name must contain alphabets and length from 1 to 20 characters")
 	private String firstName;
 	
 	@Column(name = "lastname", length = 100, nullable = false,unique = true)
-	@NotNull(message = "Name must contain alphabets and  may contain (./-/_)  and length from 1 to 20 characters")
+	@NotNull(message = "Name must contain alphabets and length from 1 to 20 characters")
 	private String lastName;
 	
 	@Column(name = "email", unique = true, nullable = false, length = 25)

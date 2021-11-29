@@ -24,14 +24,14 @@ public class UserAddressContoller {
 	UserAddressService useraddservice;
 	
 	@PostMapping("/adduseraddress")
-		public ResponseEntity<UserAddress> AddUserAddress(@RequestBody UserAddress a) {
+		public ResponseEntity<UserAddress> adduserdddress(@RequestBody UserAddress a) {
 		 UserAddress a1=useraddservice.addUserAddress(a );
 		 ResponseEntity re=new ResponseEntity<UserAddress>(a1,HttpStatus.OK);
 		 return re;
 	}
 	@PutMapping("/updateuseraddress")
 	
-		public ResponseEntity<UserAddress> UpdateUserAddressDetails(@RequestBody UserAddress u2)throws Throwable
+		public ResponseEntity<UserAddress> updateuserdddressdetails(@RequestBody UserAddress u2)throws Throwable
 		{
 			UserAddress u1= useraddservice.updateUserAddressDetails(u2); 
 			ResponseEntity re = new ResponseEntity<UserAddress>(u1,HttpStatus.OK);
@@ -39,14 +39,14 @@ public class UserAddressContoller {
 			
 		}
 	 @DeleteMapping("/deleteuseraddres")
-	  public ResponseEntity<UserAddress> DeleteUserAddress(@RequestBody UserAddress d2){
+	  public ResponseEntity<UserAddress> deleteuseraddress(@RequestBody UserAddress d2){
 	   useraddservice.deleteUserAddress(d2);
 	   ResponseEntity re =new ResponseEntity<String>("deleted",HttpStatus.OK);
 	   return re;
 	 
 	}
 	 @GetMapping("/viewuseraddress")
-	 public ResponseEntity<List<UserAddress>> ViewUserAddressList(){
+	 public ResponseEntity<List<UserAddress>> viewuseraddressList(){
 		 List<UserAddress> v2=useraddservice.viewUserAddressList();
 		 ResponseEntity re =new ResponseEntity<List<UserAddress>>(v2,HttpStatus.OK);
 		 return re;

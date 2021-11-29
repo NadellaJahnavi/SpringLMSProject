@@ -36,9 +36,6 @@ public class BooksOrder {
 	
 	@OneToOne(cascade=CascadeType.MERGE) 
 	private Books books;
-	  
-	@ManyToOne(cascade=CascadeType.MERGE)
-	private Admin admin;
 	 
 	public int getOrderId() 
 	{
@@ -80,14 +77,5 @@ public class BooksOrder {
 	  public Books getBooks() { return books; } public void setBooks(Books books) {
 	  this.books = books; }
 	 
-	
-	public Admin getAdmin()
-	{
-		return admin;
-	}
-	public void setAdmin(Admin admin) 
-	{
-		this.admin = admin;
-	}
 	
 }
