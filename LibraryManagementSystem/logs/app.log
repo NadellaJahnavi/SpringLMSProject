@@ -367,3 +367,4 @@
 2021-11-29 11:16:47,176 INFO com.LibraryManagementSystemApplication [main] Started LibraryManagementSystemApplication in 5.794 seconds (JVM running for 6.509)
 2021-11-29 11:16:50,935 INFO org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] [http-nio-8080-exec-1] Initializing Spring DispatcherServlet 'dispatcherServlet'
 2021-11-29 11:16:50,935 INFO org.springframework.web.servlet.DispatcherServlet [http-nio-8080-exec-1] Initializing Servlet 'dispatcherServlet'
+2021-11-29 11:16:50,935 INFO org.springframework.web.servlet.DispatcherServlet [http-nio-8080-exec-1] Completed initialization in 0 ms
